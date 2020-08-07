@@ -1,0 +1,22 @@
+description = 'agent'
+
+dependencies {
+    implementation project(':common')
+
+    //implementation libraries.client_core
+    //implementation libraries.client_cio
+}
+
+// Required for multiple uberjar targets
+shadowJar {
+    mergeServiceFiles()
+}
+
+task agentJar(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = 'prometheus-agent.jar'
+    manifest {
+        attributes('Main-Class': 'io.prometheus.Agent')
+    }
+    from zipTree(shadowJar.archiveFile)
+}
+

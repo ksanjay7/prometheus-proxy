@@ -1,0 +1,10 @@
+
+description = 'common'
+
+
+dependencies {
+    implementation project(':common')
+
+    //implementation libraries.server_core
+}
+

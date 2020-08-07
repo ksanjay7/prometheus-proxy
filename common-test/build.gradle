@@ -1,0 +1,32 @@
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+description = 'common-test'
+
+dependencies {
+    implementation project(':common')
+    implementation project(':proxy')
+    implementation project(':agent')
+
+    //implementation libraries.server_core
+    //implementation libraries.server_cio
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    excludes: [
+                            '**/ConfigVals*',
+                            'io/prometheus/grpc/**'
+                    ])
+        }))
+    }
+}
+
+check.dependsOn jacocoTestReport

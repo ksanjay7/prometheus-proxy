@@ -1,0 +1,21 @@
+description = 'proxy'
+
+dependencies {
+    implementation project(':common')
+
+    //implementation libraries.server_core
+    //implementation libraries.server_cio
+}
+
+// Required for multiple uberjar targets
+shadowJar {
+    mergeServiceFiles()
+}
+
+task proxyJar(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = 'prometheus-proxy.jar'
+    manifest {
+        attributes('Main-Class': 'io.prometheus.Proxy')
+    }
+    from zipTree(shadowJar.archiveFile)
+}

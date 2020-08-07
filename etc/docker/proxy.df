@@ -16,7 +16,7 @@ USER $APPLICATION_USER
 # Make /app the working directory
 WORKDIR /app
 
-COPY ./build/libs/prometheus-proxy.jar /app/prometheus-proxy.jar
+COPY ./proxy/build/libs/prometheus-proxy.jar /app/prometheus-proxy.jar
 
 EXPOSE 8080
 EXPOSE 8082

@@ -16,7 +16,7 @@ USER $APPLICATION_USER
 # Make /app the working directory
 WORKDIR /app
 
-COPY ./build/libs/prometheus-agent.jar /app/prometheus-agent.jar
+COPY ./agent/build/libs/prometheus-agent.jar /app/prometheus-agent.jar
 
 EXPOSE 8083
 EXPOSE 8093
